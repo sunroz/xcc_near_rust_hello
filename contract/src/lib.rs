@@ -94,6 +94,7 @@ impl Contract {
         )
     }
 
+    #[private]
     pub fn query_get_signer_account_id_callback(&mut self, #[callback_result] call_result: Result<String, near_sdk::PromiseError>) -> String {
         // Check if the promise succeeded by calling the method outlined in external.rs
         if call_result.is_err() {
@@ -119,6 +120,7 @@ impl Contract {
         )
     }
 
+    #[private]
     pub fn query_get_current_account_id_callback(&mut self, #[callback_result] call_result: Result<String, near_sdk::PromiseError>) -> String {
         // Check if the promise succeeded by calling the method outlined in external.rs
         if call_result.is_err() {
@@ -144,6 +146,7 @@ impl Contract {
         )
     }
 
+    #[private]
     pub fn query_get_predecessor_account_id_callback(&mut self, #[callback_result] call_result: Result<String, near_sdk::PromiseError>) -> String {
         // Check if the promise succeeded by calling the method outlined in external.rs
         if call_result.is_err() {
