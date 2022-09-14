@@ -10,15 +10,21 @@ If you haven't installed dependencies during setup:
 
 Build and deploy your contract to TestNet with a temporary dev account:
 
-`near delete xcc_hello.sunroz.testnet sunroz.testnet`
+`near delete xcc_near_rust_hello.sunroz.testnet sunroz.testnet`
 
-`near create-account xcc_hello.sunroz.testnet --initialBalance 11 --masterAccount sunroz.testnet`
+`near create-account xcc_near_rust_hello.sunroz.testnet --initialBalance 11 --masterAccount sunroz.testnet`
 
-`near deploy xcc_hello.sunroz.testnet --wasmFile ./contract/target/wasm32-unknown-unknown/release/xcc_hello.wasm --initFunction init --initArgs '{"xcc_contract_address": "near_rust_hello.sunroz.testnet"}' --accountId sunroz.testnet`
+`near deploy xcc_near_rust_hello.sunroz.testnet --wasmFile ./contract/target/wasm32-unknown-unknown/release/xcc_near_rust_hello.wasm --initFunction init --initArgs '{"xcc_contract_address": "near_rust_hello.sunroz.testnet"}' --accountId sunroz.testnet`
 
-`near call xcc_hello.sunroz.testnet query_greeting '{}' --accountId sunroz.testnet`
+`near call xcc_near_rust_hello.sunroz.testnet query_greeting '{}' --accountId sunroz.testnet`
 
-`near call xcc_hello.sunroz.testnet change_greeting '{"new_greeting":"XCC Hi"}' --accountId sunroz.testnet`
+`near call xcc_near_rust_hello.sunroz.testnet change_greeting '{"new_greeting":"Hello World"}' --accountId sunroz.testnet`
+
+`near call xcc_near_rust_hello.sunroz.testnet query_get_signer_account_id '{}' --accountId sunroz.testnet`
+
+`near call xcc_near_rust_hello.sunroz.testnet query_get_current_account_id '{}' --accountId sunroz.testnet`
+
+`near call xcc_near_rust_hello.sunroz.testnet query_get_predecessor_account_id '{}' --accountId sunroz.testnet`
 
 Test your contract:
 

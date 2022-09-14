@@ -47,7 +47,7 @@ impl Contract {
     pub fn query_greeting_callback(&self, #[callback_result] call_result: Result<String, near_sdk::PromiseError>) -> String {
         // Check if the promise succeeded by calling the method outlined in external.rs
         if call_result.is_err() {
-            log!("There was an error contacting Hello NEAR");
+            log!("There was an error contacting NearRustHello");
             return "".to_string();
         }
 
@@ -81,7 +81,80 @@ impl Contract {
         }
     }
 
+    pub fn query_get_signer_account_id(&mut self) -> Promise {
+        // Create a promise to call NearRustHello.get_signer_account_id()
+        let promise = near_rust_hello::ext(self.xcc_contract_address.clone())
+        .with_static_gas(Gas(9*TGAS))
+        .get_signer_account_id();
 
+        return promise.then(  // Create a promise to callback query_get_signer_account_id_callback
+            Self::ext(env::current_account_id())
+            .with_static_gas(Gas(9*TGAS))
+            .query_get_signer_account_id_callback()
+        )
+    }
+
+    pub fn query_get_signer_account_id_callback(&mut self, #[callback_result] call_result: Result<String, near_sdk::PromiseError>) -> String {
+        // Check if the promise succeeded by calling the method outlined in external.rs
+        if call_result.is_err() {
+            log!("There was an error contacting NearRustHello");
+            return "".to_string();
+        }
+
+        // Return the signer_account_id
+        let signer_account_id: String = call_result.unwrap();
+        signer_account_id
+    }
+
+    pub fn query_get_current_account_id(&mut self) -> Promise {
+        // Create a promise to call NearRustHello.get_current_account_id()
+        let promise = near_rust_hello::ext(self.xcc_contract_address.clone())
+        .with_static_gas(Gas(9*TGAS))
+        .get_current_account_id();
+
+        return promise.then(  // Create a promise to callback query_get_current_account_id_callback
+            Self::ext(env::current_account_id())
+            .with_static_gas(Gas(9*TGAS))
+            .query_get_current_account_id_callback()
+        )
+    }
+
+    pub fn query_get_current_account_id_callback(&mut self, #[callback_result] call_result: Result<String, near_sdk::PromiseError>) -> String {
+        // Check if the promise succeeded by calling the method outlined in external.rs
+        if call_result.is_err() {
+            log!("There was an error contacting NearRustHello");
+            return "".to_string();
+        }
+
+        // Return the current_account_id
+        let current_account_id: String = call_result.unwrap();
+        current_account_id
+    }
+
+    pub fn query_get_predecessor_account_id(&mut self) -> Promise {
+        // Create a promise to call NearRustHello.get_predecessor_account_id()
+        let promise = near_rust_hello::ext(self.xcc_contract_address.clone())
+        .with_static_gas(Gas(9*TGAS))
+        .get_predecessor_account_id();
+
+        return promise.then(  // Create a promise to callback query_get_predecessor_account_id_callback
+            Self::ext(env::current_account_id())
+            .with_static_gas(Gas(9*TGAS))
+            .query_get_predecessor_account_id_callback()
+        )
+    }
+
+    pub fn query_get_predecessor_account_id_callback(&mut self, #[callback_result] call_result: Result<String, near_sdk::PromiseError>) -> String {
+        // Check if the promise succeeded by calling the method outlined in external.rs
+        if call_result.is_err() {
+            log!("There was an error contacting NearRustHello");
+            return "".to_string();
+        }
+
+        // Return the predecessor_account_id
+        let predecessor_account_id: String = call_result.unwrap();
+        predecessor_account_id
+    }
 }
 
 /*
